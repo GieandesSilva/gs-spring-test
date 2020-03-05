@@ -43,6 +43,7 @@ public class EmployeeController {
 
 	@PostMapping("/employees")
 	Employee newEmployee(@RequestBody Employee newEmployee) {
+//		return newEmployee;
 		return this.repository.save(newEmployee);
 	}
 
@@ -58,7 +59,8 @@ public class EmployeeController {
 	Employee replaceEmployee(@RequestBody Employee newEmployee, @PathVariable Long id) {
 
 		return repository.findById(id).map(employee -> {
-			employee.setName(newEmployee.getName());
+			employee.setFirstName(newEmployee.getFirstName());
+			employee.setLastName(newEmployee.getLastName());
 			employee.setRole(newEmployee.getRole());
 			return repository.save(employee);
 		}).orElseGet(() -> {
